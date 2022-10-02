@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{asset::AssetServerSettings, prelude::*};
 
 fn main() {
     App::new()
@@ -7,5 +7,6 @@ fn main() {
             ..default()
         })
         .add_plugins(DefaultPlugins)
+        .add_plugins(cordyceps::AssetPlugins)
         .run();
 }
