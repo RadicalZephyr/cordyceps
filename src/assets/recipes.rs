@@ -25,10 +25,10 @@ impl AssetLoader for RecipeLoader {
         _bytes: &'a [u8],
         _load_context: &'a mut bevy::asset::LoadContext,
     ) -> bevy::asset::BoxedFuture<'a, Result<(), bevy::asset::Error>> {
-        todo!()
+        Box::pin(async move {})
     }
 
     fn extensions(&self) -> &[&str] {
-        todo!()
+        todo!("recipes extensions")
     }
 }

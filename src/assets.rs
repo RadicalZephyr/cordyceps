@@ -1,6 +1,7 @@
 use bevy::{app::PluginGroupBuilder, prelude::*};
 
 mod recipes;
+pub use recipes::Recipe;
 
 pub struct AssetPlugins;
 
