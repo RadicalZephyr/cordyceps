@@ -1,5 +1,5 @@
 use bevy::{asset::LoadedFolder, prelude::*};
-use cordyceps::assets::Recipe;
+use cordyceps::assets::Script;
 
 fn main() {
     App::new()
@@ -24,7 +24,7 @@ fn setup(mut state: ResMut<State>, asset_server: Res<AssetServer>) {
 fn print_on_load(
     mut state: ResMut<State>,
     folders: ResMut<Assets<LoadedFolder>>,
-    recipes: ResMut<Assets<Recipe>>,
+    recipes: ResMut<Assets<Script>>,
 ) {
     if state.printed || recipes.is_empty() {
         return;
@@ -33,7 +33,7 @@ fn print_on_load(
         let recipes: Vec<_> = folder
             .handles
             .iter()
-            .filter_map(|handle| recipes.get(&handle.clone_weak().typed::<Recipe>()))
+            .filter_map(|handle| recipes.get(&handle.clone_weak().typed::<Script>()))
             .collect();
 
         info!("Custom asset loaded: {:?}", recipes);

@@ -2,30 +2,30 @@ use bevy::{asset::AssetLoader, prelude::*, reflect::TypeUuid};
 use futures_lite::AsyncRead;
 use serde::Deserialize;
 
-pub struct PZRecipesAssetPlugin;
+pub struct PZScriptAssetsPlugin;
 
-impl Plugin for PZRecipesAssetPlugin {
+impl Plugin for PZScriptAssetsPlugin {
     fn build(&self, app: &mut App) {
-        app.register_asset_loader(RecipeLoader)
-            .init_asset::<Recipe>();
-        app.init_asset_loader::<RecipeLoader>();
+        app.register_asset_loader(ScriptLoader)
+            .init_asset::<Script>();
+        app.init_asset_loader::<ScriptLoader>();
     }
 }
 
 #[derive(Asset, Debug, Deserialize, TypePath, TypeUuid)]
 #[uuid = "34aea543-3fec-401a-ae19-1e42f280d51c"]
-pub struct Recipe {
+pub struct Script {
     name: String,
 }
 
 #[derive(Default)]
-pub struct RecipeLoader;
+pub struct ScriptLoader;
 
 #[derive(Copy, Clone, Debug, thiserror::Error)]
 pub enum Error {}
 
-impl AssetLoader for RecipeLoader {
-    type Asset = Recipe;
+impl AssetLoader for ScriptLoader {
+    type Asset = Script;
     type Settings = ();
     type Error = Error;
 

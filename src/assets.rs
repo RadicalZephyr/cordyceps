@@ -1,12 +1,12 @@
 use bevy::{app::PluginGroupBuilder, prelude::*};
 
-mod recipes;
-pub use recipes::Recipe;
+mod script;
+pub use script::Script;
 
 pub struct AssetPlugins;
 
 impl PluginGroup for AssetPlugins {
     fn build(self) -> PluginGroupBuilder {
-        PluginGroupBuilder::start::<Self>().add(recipes::PZRecipesAssetPlugin)
+        PluginGroupBuilder::start::<Self>().add(script::PZScriptAssetsPlugin)
     }
 }
