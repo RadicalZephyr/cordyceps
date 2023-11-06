@@ -1,16 +1,18 @@
 use bevy::{asset::AssetLoader, prelude::*, reflect::TypeUuid};
+use futures_lite::AsyncRead;
 use serde::Deserialize;
 
 pub struct PZRecipesAssetPlugin;
 
 impl Plugin for PZRecipesAssetPlugin {
     fn build(&self, app: &mut App) {
-        app.add_asset::<Recipe>();
+        app.register_asset_loader(RecipeLoader)
+            .init_asset::<Recipe>();
         app.init_asset_loader::<RecipeLoader>();
     }
 }
 
-#[derive(Debug, Deserialize, TypeUuid)]
+#[derive(Asset, Debug, Deserialize, TypePath, TypeUuid)]
 #[uuid = "34aea543-3fec-401a-ae19-1e42f280d51c"]
 pub struct Recipe {
     name: String,
@@ -19,13 +21,21 @@ pub struct Recipe {
 #[derive(Default)]
 pub struct RecipeLoader;
 
+#[derive(Copy, Clone, Debug, thiserror::Error)]
+pub enum Error {}
+
 impl AssetLoader for RecipeLoader {
+    type Asset = Recipe;
+    type Settings = ();
+    type Error = Error;
+
     fn load<'a>(
         &'a self,
-        _bytes: &'a [u8],
+        _reader: &'a mut (dyn AsyncRead + Sync + Unpin + Send + '_),
+        _settings: &'a Self::Settings,
         _load_context: &'a mut bevy::asset::LoadContext,
-    ) -> bevy::asset::BoxedFuture<'a, Result<(), bevy::asset::Error>> {
-        Box::pin(async move {})
+    ) -> bevy::asset::BoxedFuture<'a, Result<Self::Asset, Self::Error>> {
+        Box::pin(async move { todo!() })
     }
 
     fn extensions(&self) -> &[&str] {
