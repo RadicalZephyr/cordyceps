@@ -1,6 +1,6 @@
 use nom::{
-    bytes::complete::is_not,
-    character::complete::{alpha1, char, multispace0},
+    bytes::streaming::is_not,
+    character::streaming::{alpha1, char, multispace0},
     sequence::{delimited, preceded, separated_pair, terminated},
     IResult,
 };
