@@ -15,6 +15,7 @@ impl Plugin for PZScriptAssetsPlugin {
 #[derive(Asset, Debug, Deserialize, TypePath, TypeUuid)]
 #[uuid = "34aea543-3fec-401a-ae19-1e42f280d51c"]
 pub struct Script {
+    #[allow(dead_code)]
     name: String,
 }
 
